@@ -102,3 +102,8 @@ output "this_db_parameter_group_arn" {
   description = "The ARN of the db parameter group"
   value       = module.db.this_db_parameter_group_arn
 }
+
+output "region" {
+  description = "AWS region"
+  value       = "us-east-2"
+}

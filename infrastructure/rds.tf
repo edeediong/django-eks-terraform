@@ -1,16 +1,3 @@
-data "aws_vpc" "default" {
-  default = true
-}
-
-data "aws_subnet_ids" "all" {
-  vpc_id = data.aws_vpc.default.id
-}
-
-data "aws_security_group" "default" {
-  vpc_id = data.aws_vpc.default.id
-  name   = "default"
-}
-
 #####
 # DB
 #####
@@ -32,7 +19,7 @@ module "db" {
   password = "YourPwdShouldBeLongAndSecure!"
   port     = "3306"
 
-  vpc_security_group_ids = [data.aws_security_group.default.id]
+  vpc_security_group_ids = [aws_security_group.db_mgmt.id]
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"

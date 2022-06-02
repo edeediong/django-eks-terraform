@@ -1,0 +1,60 @@
+name: Lint Entire Repository
+
+on: 
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+
+  docker-lint:
+    name: Lint Dockerfile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build an image from Dockerfile
+        working-directory: app
+        run: docker build -t hello_django:${{ github.sha }} .
+
+      - name: Lint Dockerfile
+        uses: nemotoy/dockle-action@main
+        with:
+          image: hello_django:${{ github.sha }}
+          exit-level: WARN
+
+  github-lint:
+    name: Scan GitHub Actions Workflow
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Static GitHub Actions Workflow Linter
+        id: actionlint-scan
+        run: |
+          brew install actionlint
+          actionlint
+
+  python-lint:
+    name: Lint Python Files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.8"
+
+      - name: Install dependencies
+        working-directory: app
+        run: |
+          pip install -r requirements.txt
+          pip install pylint
+      

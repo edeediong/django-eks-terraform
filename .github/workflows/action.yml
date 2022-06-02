@@ -60,7 +60,7 @@ jobs:
 
       - name: Run pylint
         working-directory: app
-        run: pylint $(git ls-files '*.py') --exit-zero
+        run: "pylint $(git ls-files '*.py') --exit-zero"
   
   tflint:
     runs-on: ubuntu-latest

@@ -1,6 +1,7 @@
 # pull official base image
 FROM python:3.8.5-slim-buster
 
+USER hello
 # set work directory
 WORKDIR /usr/src/app
 

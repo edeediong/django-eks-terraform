@@ -1,4 +1,4 @@
-name: Lint Entire Repository
+name: Linters
 
 on: 
   push:

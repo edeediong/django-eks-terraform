@@ -60,7 +60,7 @@ jobs:
 
       - name: Run pylint
         working-directory: app
-        run: pylint *.py --exit-zero
+        run: pylint ./*.py --exit-zero
   
   tflint:
     runs-on: ubuntu-latest

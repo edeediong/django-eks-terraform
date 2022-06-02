@@ -64,6 +64,7 @@ jobs:
   
   tflint:
     runs-on: ubuntu-latest
+    name: Lint Terraform Code
 
     steps:
     - uses: actions/checkout@v2

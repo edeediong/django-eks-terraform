@@ -3,6 +3,7 @@ module "eks" {
   cluster_name    = local.cluster_name
   cluster_version = "1.18"
   subnets         = module.vpc.private_subnets
+  version         = "v9.0.0"
 
   tags = {
     Environment = "training"

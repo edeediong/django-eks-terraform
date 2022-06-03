@@ -56,7 +56,6 @@ jobs:
         working-directory: app
         run: |
           pip install -r requirements.txt
-          pip install pylint
 
       - name: Run pylint
         working-directory: app

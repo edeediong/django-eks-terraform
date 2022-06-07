@@ -3,7 +3,7 @@
 #####
 module "db" {
   source = "terraform-aws-modules/rds/aws"
-  version = "2.0"
+  version = "4.4.0"
 
   identifier = "demodb"
 
@@ -15,7 +15,6 @@ module "db" {
   storage_encrypted = false
 
   # kms_key_id        = "arm:aws:kms:<region>:<account id>:key/<kms key id>"
-  name     = "demodb"
   username = "user"
   password = "YourPwdShouldBeLongAndSecure!"
   port     = "3306"
@@ -45,9 +44,6 @@ module "db" {
 
   # DB option group
   major_engine_version = "5.7"
-
-  # Snapshot name upon DB deletion
-  final_snapshot_identifier = "demodb"
 
   # Database Deletion Protection
   deletion_protection = false

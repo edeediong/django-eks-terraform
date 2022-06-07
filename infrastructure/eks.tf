@@ -1,15 +1,9 @@
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"
+  version         = "17.24.0"
   cluster_name    = local.cluster_name
-  cluster_version = "1.18"
+  cluster_version = "1.20"
   subnets         = module.vpc.private_subnets
-  version         = "v9.0.0"
-
-  tags = {
-    Environment = "training"
-    GithubRepo  = "terraform-aws-eks"
-    GithubOrg   = "terraform-aws-modules"
-  }
 
   vpc_id = module.vpc.vpc_id
 
@@ -22,8 +16,8 @@ module "eks" {
       name                          = "worker-group-1"
       instance_type                 = "t2.small"
       additional_userdata           = "echo foo bar"
-      asg_desired_capacity          = 2
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
+      asg_desired_capacity          = 2
     },
     {
       name                          = "worker-group-2"
@@ -42,4 +36,3 @@ data "aws_eks_cluster" "cluster" {
 data "aws_eks_cluster_auth" "cluster" {
   name = module.eks.cluster_id
 }
-

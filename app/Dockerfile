@@ -16,4 +16,6 @@ RUN pip install -r requirements.txt
 # copy project
 COPY . .
 
-CMD gunicorn hello_django.wsgi:application --bind 0.0.0.0:8000
+ENTRYPOINT gunicorn
+
+CMD hello_django.wsgi:application --bind 0.0.0.0:8000
